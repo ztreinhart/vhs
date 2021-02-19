@@ -1,0 +1,12 @@
+version: "3"
+services:
+  vhs:
+    build: ..
+    tty: true
+    ports:
+      - "8888:8888"
+      - "2345:2345"
+    volumes:
+      - ..:/go/vhs
+  nginx:
+    image: "nginx"
