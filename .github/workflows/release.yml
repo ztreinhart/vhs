@@ -2,12 +2,7 @@ name: release
 
 on:
   release:
-    types: [published, created, edited, prereleased, released]
-  # push:
-  #   branches:
-  #   - "!*"
-  #   tags:
-  #   - "v*.*.*"
+    types: [published]
 
 jobs:
 
@@ -48,23 +43,3 @@ jobs:
         args: release
       env:
         GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
-
-  docs:
-    name: docs
-    runs-on: ubuntu-latest
-    steps:
-    -
-      name: Checkout
-      uses: actions/checkout@v2
-      with:
-        submodules: true
-    -
-      name: Set up environment
-      run: |
-        make init
-    -
-      name: Publish Site
-      uses: chabad360/hugo-gh-pages@master
-      with:
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
-        siteDir: /github/workspace/site
